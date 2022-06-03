@@ -48,10 +48,10 @@ class NewCompetCommand extends Command
 
         $compet = new Competition();
         $compet->setName($competName);
-        $compet->setCity($competSport);
-        $compet->setName($competCity);
-        $compet->setCity($start_date);
-        $compet->setName($stop_date);
+        $compet->setSport($competSport);
+        $compet->setCity($competCity);
+        $compet->setStartDate($start_date);
+        $compet->setStopDate($stop_date);
 
         $this->entityManager->persist($compet);
         $this->entityManager->flush();

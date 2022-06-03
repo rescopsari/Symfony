@@ -104,7 +104,7 @@ class Competition
         return $this;
     }
 
-    public function getAllPlayer() {
+    public function getAllPlayer($competId) {
         
     }
 

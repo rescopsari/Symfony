@@ -31,6 +31,7 @@ class NewTeamCommand extends Command
             ->addOption('teamName', null, InputOption::VALUE_REQUIRED, 'Name of the competition')
             ->addOption('teamCity', null, InputOption::VALUE_REQUIRED, 'Sport of the competition')
             ->addOption('teamColor', null, InputOption::VALUE_REQUIRED, 'City of the competition')
+            ->addOption('competId', null, InputOption::VALUE_REQUIRED, 'Id de la compet')
         ;
     }
 
@@ -41,11 +42,13 @@ class NewTeamCommand extends Command
         $teamName = $input->getOption('teamName');
         $teamCity = $input->getOption('teamCity');
         $teamColor = $input->getOption('teamColor');
+        $competId = $input->getOption('competId');
 
         $team = new Team();
         $team->setName($teamName);
         $team->setCity($teamCity);
-        $team->setName($teamColor);
+        $team->setColor($teamColor);
+        $team->setCompetitionId($competId);
 
         $this->entityManager->persist($team);
         $this->entityManager->flush();
