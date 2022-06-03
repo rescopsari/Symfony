@@ -78,4 +78,14 @@ class Player
 
         return $this;
     }
+
+    public function getAllCompet($teamId) {
+        // on selectionne les competitions qui ont le meme ID et les equipes inscrites ou se trouve le joueur
+        $conn = $this->getEntityManager()
+        ->getConnection();
+
+        $sql = "SELECT name FROM Competition WHERE id == (SELECT id FROM Team where Id == $teamId)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    }
 }

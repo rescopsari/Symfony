@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\entityManager;
 use App\Repository\CompetitionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -105,7 +106,22 @@ class Competition
     }
 
     public function getAllPlayer($competId) {
-        
+        // on selectionne les joueurs qui ont le meme ID et les equipes inscrites
+        $conn = $this->getEntityManager()
+        ->getConnection();
+
+        $sql = "SELECT name FROM Player WHERE id == (SELECT id FROM Team where competId == $competId)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    }
+    
+    public function getTeamBigName() {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+
+        $sql = "SELECT MAX(LEN(name)) FROM Team";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
     }
 
     /**
